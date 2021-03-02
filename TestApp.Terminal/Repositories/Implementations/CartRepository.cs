@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TestApp.Terminal.Entities;
+using TestApp.Terminal.Repositories.Interfaces;
 
-namespace TestApp.Terminal.Repositories
+namespace TestApp.Terminal.Repositories.Implementations
 {
-    internal class CartRepository
+    public class CartRepository : ICartRepository
     {
-        public IDictionary<string, ProductEntity> Products { get; protected set; }
+        private IDictionary<string, ProductCartEntity> Products { get; }
 
-        public CartRepository() => this.Products = new Dictionary<string, ProductEntity>();
+        public CartRepository() => this.Products = new Dictionary<string, ProductCartEntity>();
+
+        public IDictionary<string, ProductCartEntity> GetProducts() => this.Products;
 
         public void AddProduct(string productCode)
         {
@@ -16,7 +19,7 @@ namespace TestApp.Terminal.Repositories
 
             if (product == null)
             {
-                var newProduct = new ProductEntity(productCode);
+                var newProduct = new ProductCartEntity(productCode);
                 this.Products.Add(newProduct.ProductCode, newProduct);
                 return;
             }
@@ -29,7 +32,7 @@ namespace TestApp.Terminal.Repositories
             this.Products.Clear();
         }
 
-        private ProductEntity GetProduct(string productCode)
+        private ProductCartEntity GetProduct(string productCode)
         {
             return this.Products
                 .Where(c => c.Key == productCode)

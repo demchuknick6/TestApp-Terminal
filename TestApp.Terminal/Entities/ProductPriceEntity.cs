@@ -18,18 +18,5 @@
             this.Volume = volume;
             this.VolumePrice = volumePrice;
         }
-
-        public decimal CalculateProductPrice(int productCount)
-        {
-            if (this.Volume == null || this.VolumePrice == null)
-            {
-                return this.UnitPrice * productCount;
-            }
-
-            var singlesCount = productCount % this.Volume;
-            var volumeGroupsCount = (int)(productCount / this.Volume);
-
-            return (decimal)(this.UnitPrice * singlesCount + this.VolumePrice * volumeGroupsCount);
-        }
     }
 }

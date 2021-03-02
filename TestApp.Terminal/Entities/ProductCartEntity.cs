@@ -1,12 +1,12 @@
 ﻿namespace TestApp.Terminal.Entities
 {
-    internal class ProductEntity
+    public class ProductCartEntity
     {
         public string ProductCode { get; }
         
         public int Count { get; set; }
 
-        public ProductEntity(string productCode)
+        public ProductCartEntity(string productCode)
         {
             this.ProductCode = productCode;
             this.Count = 1;
